@@ -1,5 +1,8 @@
 const formEl = document.querySelector('.feedback-form');
-let formData = {};
+let formData = {
+  email: '',
+  message: '',
+};
 
 const fillFormFilds = () => {
   const formDataFromLS = JSON.parse(
@@ -34,10 +37,12 @@ const onFormSubmit = event => {
     formEl.elements.message.value === ''
   ) {
     alert('Fill please all fields');
+    return;
   }
-
-  event.target.reset();
+  console.log(formData);
   localStorage.removeItem('feedback-form-state');
+  formEl.reset();
+  formData = { email: '', message: '' };
 };
 
 formEl.addEventListener('input', onFormInput);
